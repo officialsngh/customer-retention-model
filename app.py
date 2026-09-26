@@ -182,10 +182,27 @@ def train_model_pipeline():
     selected_indices = selector.get_support(indices=True)
     feature_scores = selector.scores_[selected_indices]
     
+    # Extract feature names properly
+    num_cols = ['tenure', 'MonthlyCharges', 'TotalCharges']
+    cat_cols = ['gender', 'SeniorCitizen', 'Partner', 'Dependents',
+                'PhoneService', 'MultipleLines', 'InternetService',
+                'OnlineSecurity', 'OnlineBackup', 'DeviceProtection',
+                'TechSupport', 'StreamingTV', 'StreamingMovies',
+                'Contract', 'PaperlessBilling', 'PaymentMethod']
+    
+    cat_encoder = preprocessor.named_transformers_['cat'].named_steps['onehot']
+    cat_features = []
+    for i, col in enumerate(cat_cols):
+        if hasattr(cat_encoder, 'categories_'):
+            categories = cat_encoder.categories_[i][1:]
+            cat_features.extend([f"{col}_{cat}" for cat in categories])
+            
+    all_feature_names = np.array(num_cols + cat_features)
+    selected_feature_names = all_feature_names[selected_indices]
+    
     # Create feature importance dataframe
-    feature_names = [f'Feature_{i}' for i in range(len(selected_indices))]  # Simplified names
     feature_importance_df = pd.DataFrame({
-        'Feature': feature_names,
+        'Feature': selected_feature_names,
         'Importance': feature_scores
     }).sort_values('Importance', ascending=False)
     
