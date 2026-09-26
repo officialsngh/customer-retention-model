@@ -12,7 +12,7 @@ This project uses machine learning to predict which customers are likely to chur
 ## Project Structure  
 - ├── data/                       # Customer datasets
 - ├── results/                    # Model outputs and analysis results
-- ├── Customer Churn Prediction Model.pdf # Project documentation
+- ├── Customer_Churn_Prediction_Model.pdf # Project documentation
 - ├── README.md                   # Project documentation
 - ├── app.py                      # Streamlit dashboard application
 - ├── preprocessing_model.py      # Data preprocessing and feature engineering
@@ -30,8 +30,8 @@ You'll need Python 3.7+ and the packages listed in requirements.txt. The usual s
 
 # Installation
 1. Clone this repository:
-- git clone https://github.com/sdlk4/Customer-Churn-Prediction.git
-- cd Customer-Churn-Prediction
+- git clone https://github.com/officialsngh/customer-retention-model.git
+- cd customer-retention-model
 
 2. Install the required packages:
 - pip install -r requirements.txt
